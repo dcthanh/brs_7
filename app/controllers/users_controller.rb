@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_only, except: :show
-
+ 
   def index
     @users = User.paginate page: params[:page], per_page: 10
   end
 
   def show
     @user = User.find params[:id]
-    unless current_user.admin?
-      redirect_to :back, alert: "Access denied."
+    if !params[:type].blank? && ['following', 'followers'].include?(params[:type])
+      @title = params[:type]
+      @users = @user.send(params[:type])
+      @users = @users.paginate page: params[:page]
+      render 'show_user_follow' 
     end
   end
 
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
       redirect_to :back, alert: "Access denied."
     end
   end
-
+  
   def secure_params
     params.require(:user).permit :role
   end

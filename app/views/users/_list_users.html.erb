@@ -1,0 +1,11 @@
+<h1>All Users</h1>
+<% if @users.any? %>
+  <table class="table table-striped">
+    <tbody class="user-index">
+      <%= render @users %>
+    </tbody>
+  </table>
+  <%= will_paginate @users %>
+<% else %>
+  <h2 style="center">Empty</h2>
+<% end %>

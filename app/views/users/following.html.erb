@@ -1,0 +1,8 @@
+<% provide :title, "Following" %>
+<div class="row">
+  <h1>Following</h1>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
+  <%= will_paginate %>
+</div>
