@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :books
   resources :categories
+
+  get '/users/:id/:show_type' => 'users#show'
+  resources :relationships, only: [:create, :destroy]
 end

@@ -1,3 +1,17 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<% provide :title, @user.name %>
+<div class="row">
+  <aside class="col-md-5">
+    <section class="user_info">
+      <h1>User name: <%= @user.name %></h1>
+      <h1>Email: <%= @user.email %></h1>
+    </section>
+    <section class="follow">
+        <%= render 'devise/shared/follow' %>
+        <%= render 'follow_form' %> 
+    </section>  
+  </aside>
+
+  <div class="col-md-7">
+  </div>
+
+</div>

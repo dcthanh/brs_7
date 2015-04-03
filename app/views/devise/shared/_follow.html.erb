@@ -1,0 +1,11 @@
+<% @user ||= current_user %>
+<div class="follow">
+  <a href="<%= user_path @user %>/following" >
+    <%= hidden_field_tag ':follower_id', @user.id %>
+    <strong id="following"><%= @user.following.count %></strong> following
+  </a>
+  <a href="<%= user_path @user %>/followers" >
+    <%= hidden_field_tag ':followed_id', @user.id %>
+      <strong id="followers"><%= @user.followers.count %></strong> followers
+  </a>
+</div>
