@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :books
+  resources :books do
+    resources :reviews, except: [:index]
+  end
   resources :categories
 
   get '/users/:id/:show_type' => 'users#show'

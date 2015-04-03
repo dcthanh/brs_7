@@ -1,7 +1,7 @@
 <div style="padding: 20px;">
   <ul class="nav nav-tabs" id="myTab">
     <li><a data-toggle="tab" href="#info">Info Book</a></li>
-    <li><a data-toggle="tab" href="#reader">Reade</a></li>
+    <li><a data-toggle="tab" href="#reader">Read it</a></li>
   </ul>
   <div class="tab-content">
     <div id="info" class="tab-pane fade in active">
@@ -10,10 +10,24 @@
             <h1><%= @book.name %></h1><br>by <%= @book.author %><br>
             About the book :<br><h4><%= @book.desc %></h4><br>
             <%= link_to 'ADD LIBRARY', "#", class:"btn btn-warning" %>
+
+            <h3>Reviews of <em><%= @book.title %></em></h3>
+            <% unless current_user.nil? %>
+              <% @book.reviews.each do |review| %>
+                <p><%= review.text %></p>
+                <p><%= review.rating_out_of_ten %>/10</p>
+                <small>- <%= review.user.email %> -- <%= link_to "edit", edit_book_review_path(@book) %></small><br/>
+            <% end %>
+              <p><%= link_to "Write a review!", new_book_review_path(@book) %></p>
+             <% else %>
+              <p>Please <%= link_to "log in", new_user_session_path %> to see reviews and add your own.</p> 
+            <% end %>
           </div>
+
           <div class="col-md-4">
             <%= image_tag(@book.image, alt: @book.name, class: "image_info-book") %>
           </div>
+
       </div>
     </div>
     <div id="reader" class="tab-pane fade" style="height: 500px;overflow: scroll;">
@@ -22,6 +36,7 @@
   </div>
 </div>
 
+   
 <script type="text/javascript">
   $(document).ready(function(){ 
     $("#myTab li:eq(0) a").tab('show');
