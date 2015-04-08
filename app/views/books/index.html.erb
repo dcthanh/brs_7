@@ -1,20 +1,38 @@
-<h1>All Books</h1>
-<%= will_paginate @books %>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>No.</th>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Description</th>
-      <th>Content</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-      <%= render book %>
-    <% end %>
-  </tbody>
-</table>
+<% provide :title, "All Books" %>
+<div class="row">
+  <%= form_tag books_path, method: 'get', id: "books_search" do |f| %>
+    <%= hidden_field_tag :direction, params[:direction] unless params[:direction].blank? %>
+    <%= hidden_field_tag :sort, params[:sort] unless params[:sort].blank? %>
+    <div class="col-sm-12 well">
+      <div class="col-md-6">
+        <%= text_field_tag :search, params[:search], placeholder: 'Search...' %>
+      </div>
+      <div class="col-md-2">
+        <%= label_tag :filter, "Filter: ", class: "col-sm-3 control-label" %>
+        <%= select_tag("filter", options_for_select([['Title', 'title'], ['Author', 'author']])) %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <%= will_paginate @books %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <%= render book %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
