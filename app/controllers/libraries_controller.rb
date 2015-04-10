@@ -6,12 +6,19 @@ class LibrariesController < ApplicationController
 
   def create
     @library = Library.new params_library
-    if @library.save
-      @book = @library.book
-      flash[:success] = "Adding book to library"
-      redirect_to @book     
-    else
-      flash[:success] = "Don't create library"
+    @book = @library.book
+    @library.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy
+    @library = Library.find params[:id]
+    @book = @library.book
+    @library.destroy
+    respond_to do |format|
+      format.js
     end
   end
 
