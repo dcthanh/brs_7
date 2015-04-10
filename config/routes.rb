@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   resources :books do
     resources :reviews, except: [:index]
   end
+  resources :users do
+    resources :libraries, only: [:index]
+  end
   resources :categories
-
+  resources :libraries, only: [:create, :destroy]
   get '/users/:id/:show_type' => 'users#show'
   resources :relationships, only: [:create, :destroy]
 end
