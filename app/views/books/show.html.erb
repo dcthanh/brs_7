@@ -11,16 +11,8 @@
             About the book :<br><h4><%= @book.desc %></h4><br>
             <% unless current_user.nil? %>
               <h3>Reviews of <em><%= @book.title %></em></h3>
-              <% unless current_user.added? @book %>
-                <%= form_for (current_user.libraries.build) do |f| %>
-                  <%= hidden_field_tag :user_id, current_user.id %>
-                  <%= hidden_field_tag :book_id, @book.id %>
-                  <%= hidden_field_tag :view_times, 0 %>
-                  <%= f.submit 'ADD LIBRARY', class:"btn btn-warning" %>
-                <% end %>
-              <% else %>
-                <%= link_to "REMOVE LIBRARY", "#", class:"btn btn-primary" %>
-              <% end %>
+              <div id="view-err"></div>
+              <%= render 'library_form' %>
               <% @book.reviews.each do |review| %>
                 <p><%= review.text %></p>
                 <p><%= review.rating_out_of_ten %>/10</p>

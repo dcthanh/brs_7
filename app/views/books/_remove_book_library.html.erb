@@ -1,0 +1,5 @@
+<%= form_for(Library.find_by(user_id: current_user.id, book_id: @book.id),
+                                                       html: {method: :delete},
+                                                       remote: true) do |f| %>
+  <%= f.submit "REMOVE LIBRARY", method: :delete,class:"btn btn-primary" %>
+<% end %>

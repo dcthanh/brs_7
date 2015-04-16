@@ -1,0 +1,8 @@
+<% if @library.errors.any? %>
+  <% @library.errors.full.each do |err| %>
+    errors += "<span>" + err + "</span>"
+  <% end %> 
+  $("#view-err").append(errors)
+<% else %>
+  $("#library_form").html("<%= escape_javascript(render('books/remove_book_library')) %>")
+<% end %>

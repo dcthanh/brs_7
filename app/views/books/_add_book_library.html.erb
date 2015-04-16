@@ -1,0 +1,7 @@
+<%= form_for(current_user.libraries.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :user_id, current_user.id %></div>
+  <div><%= hidden_field_tag :book_id, @book.id %></div>
+  <div><%= hidden_field_tag :view_times, 0 %></div>
+  <%= f.submit 'ADD LIBRARY', class:"btn btn-warning" %>
+<% end %>
+

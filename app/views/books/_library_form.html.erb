@@ -1,0 +1,9 @@
+<div id="library_form">
+  <% unless current_user.added? @book %>
+    <%= render 'add_book_library' %>
+  <% else %>
+    <%= render 'remove_book_library' %>
+  <% end %>
+</div>
+
+
