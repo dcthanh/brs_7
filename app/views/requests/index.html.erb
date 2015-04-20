@@ -1,0 +1,19 @@
+<% provide :title, "#{@user.name}" %>
+<div class="row">
+  <aside class="col-md-8">
+    <div class="create-request-link-div">
+      <%= link_to "Create new request", new_user_request_path(@user) %>
+    </div>
+    <div class="list-requests-div">
+      <% if @requests.any? %>
+        <h2>Requests</h2>
+        <table class="table table-hover">
+          <ol class="requests">
+            <%= render @requests, user: @user %>
+            <%= will_paginate @requests %>
+          </ol>
+        </table>
+      <% end %>
+    </div>
+  </aside>
+</div>

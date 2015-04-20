@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409080427) do
+ActiveRecord::Schema.define(version: 20150419908309) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",          limit: 255
@@ -66,6 +66,17 @@ ActiveRecord::Schema.define(version: 20150409080427) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "requests", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.string   "title",           limit: 255
+    t.string   "content",         limit: 255
+    t.string   "approval_status", limit: 255, default: "pending"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
     t.integer  "book_id",           limit: 4
@@ -102,6 +113,7 @@ ActiveRecord::Schema.define(version: 20150409080427) do
   add_foreign_key "books", "categories"
   add_foreign_key "libraries", "books"
   add_foreign_key "libraries", "users"
+  add_foreign_key "requests", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

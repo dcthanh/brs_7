@@ -16,7 +16,7 @@
               <% @book.reviews.each do |review| %>
                 <p><%= review.text %></p>
                 <p><%= review.rating_out_of_ten %>/10</p>
-                <small>- <%= review.user.email %> -- <%= link_to "edit", edit_book_review_path(@book) %></small><br/>
+                <small>- <%= review.user.email %> </small><br/>
               <% end %>
               <p><%= link_to "Write a review!", new_book_review_path(@book) %></p>
             <% else %>

@@ -1,0 +1,18 @@
+<% provide :title, "New request for Admin" %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>New Request</h2>
+    <%= form_for [@user, @request] do |f| %>  
+      <%= render "shared/error_messages", object: f.object %>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+
+      <%= f.label :content %>
+      <%= f.text_area :content, class: "form-control" %>
+      
+      <%= f.submit "Create request", class: "button btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+

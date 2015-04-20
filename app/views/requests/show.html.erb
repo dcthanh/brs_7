@@ -1,0 +1,24 @@
+<% provide :title, "Request of #{@user.name}" %>
+<div class="row">
+  <aside class="col-md-8">
+    <div class="request-title-div">
+      <span class="request-title">
+        <%= link_to @request.title, user_request_path(@user, @request) %>
+      </span>
+    </div>
+    <div class="request-cancel-div">
+      <% if @request.set_default_status? %>
+        <span class="request-cancel">
+          <%= link_to "Cancel", user_request_path(@user, @request), method: :delete, data: {confirm: "Are you sure?"} %>
+        </span>
+      <% end %>
+    </div>
+    <div class="request-content-div">
+      <span class="request-content">
+        <%= @request.content %>
+      </span>
+    </div>
+    <div class="request-images-div">
+    </div>
+  </aside>
+</div>

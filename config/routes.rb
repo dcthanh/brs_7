@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   get "search"  => "books#index"
 
   devise_for :users
-  resources :users
+  
   resources :books do
     resources :reviews, except: [:index]
   end
   resources :users do
+    resources :requests, except: [:edit, :update]
     resources :libraries, only: [:index]
   end
   resources :categories

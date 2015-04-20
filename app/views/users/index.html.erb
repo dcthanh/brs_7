@@ -27,6 +27,9 @@
       </section>
     </aside>
   <div class="col-md-8">
+    <% if @user == current_user %>
+      <li><%= link_to "Requests", user_requests_path(@user) %></li>
+    <% end %>
     <div id="users_div"><%= render 'list_users' %></div>
   </div>
 <% end %>
